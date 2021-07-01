@@ -1,5 +1,6 @@
 const booksList = document.querySelector('.books-list');
 let myLibrary = [];
+
 function showBooks() {
   booksList.innerHTML = '';
   myLibrary.map((book) => {
@@ -17,12 +18,6 @@ function showBooks() {
   });
 }
 
-window.onload = () => {
-  showBooks();
-};
-
-const createNew = document.querySelector('#add-book-btn');
-const newBookForm = document.querySelector('#form-input');
 let booksId = 0;
 
 function Book(title, author, pages, status = false) {
@@ -35,31 +30,35 @@ function Book(title, author, pages, status = false) {
 }
 
 Book.prototype.toggleBookStatus = (id) => {
-  // eslint-disable-next-line
-  const index = myLibrary.findIndex((b) => b.id == id);
+  const index = myLibrary.findIndex((b) => b.id.toString() === id);
   const { status } = myLibrary[index];
   myLibrary[index].status = !status;
   showBooks();
 };
+// eslint-disable-next-line
+function toggleStatus(id) {
+  const book = new Book();
+  book.toggleBookStatus(id);
+}
+
+// eslint-disable-next-line
+function handleDeleteBook(id) {
+  const newBooks = myLibrary.filter((book) => book.id.toString() !== id);
+  myLibrary = newBooks;
+  showBooks();
+}
+
+window.onload = () => {
+  showBooks();
+};
+
+const createNew = document.querySelector('#add-book-btn');
+const newBookForm = document.querySelector('#form-input');
 
 function addBookToLibrary(title, author, pages) {
   const book = new Book(title, author, pages);
   myLibrary.push(book);
   showBooks();
-}
-
-// eslint-disable-next-line no-unused-vars
-function handleDeleteBook(id) {
-  // eslint-disable-next-line
-  const newBooks = myLibrary.filter((book) => book.id != id);
-  myLibrary = newBooks;
-  showBooks();
-}
-
-// eslint-disable-next-line no-unused-vars
-function toggleStatus(id) {
-  const book = new Book();
-  book.toggleBookStatus(id);
 }
 
 newBookForm.addEventListener('submit', (e) => {
