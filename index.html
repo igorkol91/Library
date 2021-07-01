@@ -1,57 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1 class="text-center">
-            This is a library project. All the books are displayed bellow.
-        </h1>
+      <h1 class="text-center">
+        This is a library project. All the books are displayed bellow.
+      </h1>
     </header>
 
-    <main>
-        <button id="add-book-btn">Add New Book</button>
-        <form id='form-input' class="d-none">
-            <div>
-                <label for="title">Title</label>
-                <input type="text" name="title" id="title">
-            </div>
-            <div>
-                <label for="author">Author</label>
-                <input type="text" name="author" id="author">
-            </div>
-            <div>
-                <label for="pages">Pages number</label>
-                <input type="number" name="pages" id="pages">
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-        
-        <section class="books-container container">
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Pages</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody class="books-list">
+    <main class="container">
+      <button id="add-book-btn">Add New Book</button>
+      <form id="form-input" class="d-none">
+        <div>
+          <label for="title">Title</label>
+          <input type="text" name="title" id="title" />
+        </div>
+        <div>
+          <label for="author">Author</label>
+          <input type="text" name="author" id="author" />
+        </div>
+        <div>
+          <label for="pages">Pages number</label>
+          <input type="number" name="pages" id="pages" />
+        </div>
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
 
-                    </tbody>
-                  </table>
-            
-        </section>
+      <section class="books-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Title</th>
+              <th scope="col">Author</th>
+              <th scope="col">Pages</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody class="books-list"></tbody>
+        </table>
+      </section>
     </main>
 
     <script src="./index.js"></script>
-</body>
+  </body>
 </html>
