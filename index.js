@@ -9,10 +9,10 @@ function showBooks() {
     <td>${book.pages}</td>
     <td>${
   book.status
-    ? `<button id=${book.id} data-index=${book.id} class='btn btn-warning book-control-btn' onclick="toggleStatus(this.id)">Read</button>`
-    : `<button id=${book.id} data-index=${book.id} class='btn btn-primary book-control-btn' onclick="toggleStatus(this.id)">Read Book</button>`
+    ? `<button id=${book.id} data-index=${book.id} class='btn btn-warning book-control-btn' onclick='toggleStatus(this.id)'>Read</button>`
+    : `<button id=${book.id} data-index=${book.id} class='btn btn-primary book-control-btn' onclick='toggleStatus(this.id)'>Read Book</button>`
 }</td>
-    <td>${`<a id=${book.id} data-index=${book.id} href='#' class='btn btn-danger book-control-btn-detele' onclick="handleDeleteBook(this.id)">Remove</a>`}</td>`;
+    <td>${`<a id=${book.id} data-index=${book.id} href='#' class='btn btn-danger book-control-btn-detele' onclick='handleDeleteBook(this.id)'>Remove</a>`}</td>`;
     return booksList.appendChild(trElement);
   });
 }
@@ -35,7 +35,8 @@ function Book(title, author, pages, status = false) {
 }
 
 Book.prototype.toggleBookStatus = (id) => {
-  const index = myLibrary.findIndex((b) => b.id === id);
+  // eslint-disable-next-line
+  const index = myLibrary.findIndex((b) => b.id == id);
   const { status } = myLibrary[index];
   myLibrary[index].status = !status;
   showBooks();
@@ -49,7 +50,8 @@ function addBookToLibrary(title, author, pages) {
 
 // eslint-disable-next-line no-unused-vars
 function handleDeleteBook(id) {
-  const newBooks = myLibrary.filter((book) => book.id !== id);
+  // eslint-disable-next-line
+  const newBooks = myLibrary.filter((book) => book.id != id);
   myLibrary = newBooks;
   showBooks();
 }
