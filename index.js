@@ -1,14 +1,16 @@
 // const booksContainer = document.querySelector('.books-container');
-window.onload = () => {showBooks();
-   deleteLogic()};
+window.onload = () => {showBooks()};
 const booksList = document.querySelector(".books-list");
 const createNew = document.querySelector("#add-book-btn");
 let myLibrary = [];
 const newBookForm = document.querySelector('#form-input')
 let bookDeleteBtns = document.querySelectorAll(".book-control-btn-detele");
 let bookBtns = document.querySelectorAll(".book-control-btn");
+let booksId = 0;
 
 function Book(title, author, pages, status=false) {
+  booksId++
+  this.id = booksId;
   this.title = title;
   this.author = author;
   this.pages = pages;
@@ -16,19 +18,19 @@ function Book(title, author, pages, status=false) {
 }
 
 function addBookToLibrary(title, author, pages) {
-  myLibrary.unshift(new Book(title, author, pages));
-  showBooks();
-  deleteLogic();
+  const book = new Book(title, author, pages)
+  myLibrary.push(book);
+  showUpdateBook(book);
 }
 
-function handleDeleteBook(btn) {
-  const bookId = btn.dataset.index;
-  let newBooks = myLibrary.filter(book => book.id !== bookId)
-  console.log(newBooks);
-  myLibrary = newBooks;
-  showBooks();
-  deleteLogic();
-  console.log(btn);
+function handleDeleteBook(id) {
+  //  const bookId = id
+  // let newBooks = myLibrary.filter(book => book.id !== bookId)
+   console.log(id);
+  // myLibrary = newBooks;
+  // showBooks();
+  // deleteLogic();
+  // console.log(btn);
 }
 
 newBookForm.addEventListener('submit',(e) => {
@@ -59,9 +61,23 @@ function showBooks(){
       ? `<button id='btn${book.id}' data-index=${book.id} class='btn btn-warning book-control-btn'>Read</button>`
       : `<button id='btn${book.id}' data-index=${book.id} class='btn btn-primary book-control-btn'>Read Book</button>`
     }</td>
-    <td>${`<button id='btn${book.id}' data-index=${book.id} class='btn btn-danger book-control-btn-detele'>Remove</button>`}</td>`;
+    <td>${`<a id='${book.id}' data-index=${book.id} href='#' class='btn btn-danger book-control-btn-detele' onclick="handleDeleteBook(this.id)">Remove</a>`}</td>`;
     return booksList.appendChild(trElement);
   });
+}
+
+function showUpdateBook(book){
+    const trElement = document.createElement("tr");
+    trElement.innerHTML = `<td>${book.title}</td>
+    <td>${book.author}</td>
+    <td>${book.pages}</td>
+    <td>${
+      book.status
+      ? `<button id='btn${book.id}' data-index=${book.id} class='btn btn-warning book-control-btn'>Read</button>`
+      : `<button id='btn${book.id}' data-index=${book.id} class='btn btn-primary book-control-btn'>Read Book</button>`
+    }</td>
+    <td>${`<a id='${book.id}' data-index=${book.id} href='#' class='btn btn-danger book-control-btn-detele' onclick="handleDeleteBook(this.id)">Remove</a>`}</td>`;
+    return booksList.appendChild(trElement);
 }
 
 function toggleBookStatus(btn) {
@@ -69,16 +85,4 @@ function toggleBookStatus(btn) {
   console.log(`toggle ${bookId}`);
 }
 
-function deleteLogic() {
-  const bookArray = Array.from(bookBtns);
-  const deleteBtns = Array.from(bookDeleteBtns);
-  if (bookArray.length > 0) {
-    bookArray.map((btn) => {
-      return btn.addEventListener("click", () => toggleBookStatus(btn));
-    });
-    deleteBtns.map((btn) => {
-      return btn.addEventListener("click", () => handleDeleteBook(btn));
-    });
-  }
-}
 
